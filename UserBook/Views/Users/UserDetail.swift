@@ -6,13 +6,15 @@ struct UserDetail: View {
     let user: User
     
     var body: some View {
-        VStack {
-            UserInfo(title: "User", value: "\(user.firstname) \(user.lastname)")
-            UserInfo(title: "E-Mail", value: user.email)
-            UserInfo(title: "Address", value: "\(user.address.street) \(user.address.suite) \(user.address.city)")
-            UserInfo(title: "Phone", value: user.phone)
-            UserInfo(title: "Website", value: user.website)
-            UserInfo(title: "Company", value: user.company.name)
+        Form {
+            Section(header: Text("User Information")) {
+                UserInfo(title: "User", value: "\(user.firstname) \(user.lastname)")
+                UserInfo(title: "E-Mail", value: user.email)
+                UserInfo(title: "Address", value: "\(user.address.street) \(user.address.suite) \(user.address.city)")
+                UserInfo(title: "Phone", value: user.phone)
+                UserInfo(title: "Website", value: user.website)
+                UserInfo(title: "Company", value: user.company.name)
+            }
         }
         .navigationTitle("User Detail")
         .navigationBarTitleDisplayMode(.inline)
@@ -35,10 +37,12 @@ struct UserInfo: View {
     
     var body: some View {
         HStack {
-            Text("\(title):")
-                .font(.headline)
+            Text(title)
+            
+            Spacer()
             
             Text(value)
+                .foregroundStyle(.secondary)
         }
     }
 }
